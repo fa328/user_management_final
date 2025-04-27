@@ -8,7 +8,8 @@ Issue 1 Email Verification: https://github.com/fa328/user_management_final/issue
 Issue 2: 
 
 ## Test Cases
-
+- test_email_verification_test
+- 
 
 ## Docker Image
 
