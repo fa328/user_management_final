@@ -3,7 +3,7 @@
 ## Project Overview
 
 ## Issue Tracking and Resolution
-Issue 1: 
+Issue 1 Email Verification: https://github.com/fa328/user_management_final/issues/1
 
 Issue 2: 
 
