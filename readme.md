@@ -10,14 +10,19 @@ Issue 2 User Role Authenticatio: https://github.com/fa328/user_management_final/
 
 Issue 3 Updating Email ID: https://github.com/fa328/user_management_final/issues/3
 
-Issue 4 
+Issue 4 Implementing Password Validation: https://github.com/fa328/user_management_final/issues/4
 
 Issue 5
+
 ## Test Cases
 - test_email_verification_test
 - test_UserService_update
 - 
 
 ## Docker Image
+
+
+## Features 
+User Profile Management
 
 ## Reflection Document
