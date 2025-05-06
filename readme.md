@@ -17,7 +17,9 @@ Issue 5
 ## Test Cases
 - test_email_verification_test
 - test_UserService_update
-- 
+- test_user_create
+- test_valid_password
+- test_invaid_password
 
 ## Docker Image
 ![alt text](image.png)
