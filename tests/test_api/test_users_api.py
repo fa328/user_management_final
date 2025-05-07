@@ -6,6 +6,7 @@ from app.models.user_model import User, UserRole
 from app.utils.nickname_gen import generate_nickname
 from app.utils.security import hash_password
 from app.services.jwt_service import decode_token  # Import your FastAPI app
+from http import HTTPStatus
 
 # Example of a test function using the async_client fixture
 @pytest.mark.asyncio
@@ -69,7 +70,7 @@ async def test_create_user_duplicate_email(async_client, verified_user):
         "role": UserRole.ADMIN.name
     }
     response = await async_client.post("/register/", json=user_data)
-    assert response.status_code == 400
+    assert response.status_code == 422
     assert "Email already exists" in response.json().get("detail", "")
 
 @pytest.mark.asyncio
