@@ -24,7 +24,7 @@ class UserBase(BaseModel):
     last_name: Optional[str] = Field(None, example="Doe")
     bio: Optional[str] = Field(None, example="Experienced software developer specializing in web applications.")
     profile_picture_url: Optional[str] = Field(None, example="https://example.com/profiles/john.jpg")
-    linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
+    linkedin_profile_url: Optional[str] = Field(None, example="https://linkedin.com/in/johndoe")
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
     role: UserRole
 
@@ -33,9 +33,37 @@ class UserBase(BaseModel):
     class Config:
         from_attributes = True
 
-class UserCreate(UserBase):
+class UserCreate(BaseModel):
     email: EmailStr = Field(..., example="john.doe@example.com")
     password: str = Field(..., example="Secure*1234")
+
+    @validator('password')
+    def validate_password_strength(cls, value):
+        # Password must be at least 8 characters long
+        if len(value) < 8:
+            raise ValueError("Password must be at least 8 characters long")
+        
+        # Password must contain at least one uppercase letter
+        if not re.search(r'[A-Z]', value):
+            raise ValueError("Password must be at least one uppercase letter")
+        
+        # Password must contain at least one lowercase letter
+        if not re.search(r'[a-z]', value):
+            raise ValueError("Password must be at least one lowercase letter")
+        
+        # Password must contain at least one digit
+        if not re.search(r'\d', value):
+            raise ValueError("Password must be at least one digit")
+        
+        # Password must contain at least one special character
+        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', value):
+            raise ValueError("Password must be at least one special character")
+        
+        # Password must not contain any spaces
+        if ' ' in value:
+            raise ValueError("Password must not contain spaces")
+        
+        return value
 
 class UserUpdate(UserBase):
     email: Optional[EmailStr] = Field(None, example="john.doe@example.com")
@@ -44,13 +72,13 @@ class UserUpdate(UserBase):
     last_name: Optional[str] = Field(None, example="Doe")
     bio: Optional[str] = Field(None, example="Experienced software developer specializing in web applications.")
     profile_picture_url: Optional[str] = Field(None, example="https://example.com/profiles/john.jpg")
-    linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
+    linkedin_profile_url: Optional[str] = Field(None, example="https://linkedin.com/in/johndoe")
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
     role: Optional[str] = Field(None, example="AUTHENTICATED")
 
     @root_validator(pre=True)
     def check_at_least_one_value(cls, values):
-        if not any(values.values()):
+        if not any(values.get(field) for field in values if values.get(field) is not None):
             raise ValueError("At least one field must be provided for update")
         return values
 
@@ -81,3 +109,4 @@ class UserListResponse(BaseModel):
     total: int = Field(..., example=100)
     page: int = Field(..., example=1)
     size: int = Field(..., example=10)
+    
