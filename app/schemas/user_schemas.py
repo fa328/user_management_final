@@ -36,6 +36,7 @@ class UserBase(BaseModel):
 class UserCreate(BaseModel):
     email: EmailStr = Field(..., example="john.doe@example.com")
     password: str = Field(..., example="Secure*1234")
+    nickname: str = Field(..., example="Johndoe")
 
     @validator('password')
     def validate_password_strength(cls, value):
