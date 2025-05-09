@@ -3,10 +3,11 @@ import pytest
 from httpx import AsyncClient
 from app.main import app
 from app.models.user_model import User, UserRole
+from uuid import uuid4
 from app.utils.nickname_gen import generate_nickname
 from app.utils.security import hash_password
 from app.services.jwt_service import decode_token  # Import your FastAPI app
-from uuid
+
 
 # Example of a test function using the async_client fixture
 @pytest.mark.asyncio
