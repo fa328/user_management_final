@@ -6,7 +6,7 @@ from app.models.user_model import User, UserRole
 from app.utils.nickname_gen import generate_nickname
 from app.utils.security import hash_password
 from app.services.jwt_service import decode_token  # Import your FastAPI app
-from app.models.user import UserRole # type: ignore
+# from app.models.user import UserRole # type: ignore
 
 # Example of a test function using the async_client fixture
 @pytest.mark.asyncio
