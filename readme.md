@@ -22,6 +22,9 @@ Issue 5 : https://github.com/fa328/user_management_final/issues/5
 - test_invaid_password
 - test_send_professional_upgrade_email
 - test_update_user_profile_success
+- test_creat_user_duplicate_nickname
+- test_creat_user_duplicate_email
+- test_verify_email
 
 
 ## Docker Image
@@ -33,6 +36,7 @@ Issue 5 : https://github.com/fa328/user_management_final/issues/5
 User Profile Management
 
 Define the function called send_professional_upgrade_email, which sends an email notification to a user when their account has been upgraded to a professional status by admins. 
+
 ## Reflection Document
 
 https://docs.google.com/document/d/1lC-aFcy-_d6q5NigeB2Rnox_9CohFbvf2FwiP-0cNFw/edit?tab=t.0
