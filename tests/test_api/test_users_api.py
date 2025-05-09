@@ -6,7 +6,7 @@ from app.models.user_model import User, UserRole
 from app.utils.nickname_gen import generate_nickname
 from app.utils.security import hash_password
 from app.services.jwt_service import decode_token  # Import your FastAPI app
-from urllib.parse import urlencode
+from uuid
 
 # Example of a test function using the async_client fixture
 @pytest.mark.asyncio
@@ -64,21 +64,23 @@ async def test_delete_user(async_client, admin_user, admin_token):
 
 @pytest.mark.asyncio
 async def test_create_user_duplicate_email(async_client, verified_user):
+    unique_email = f"{uuid.uuid4().hex}@example.com"
     user_data = {
-        "email": verified_user.email,
+        "email": unique_email,
         "password": "AnotherPassword123!",
         "role": UserRole.ADMIN.name,
         "nickname": "TestUserNickname"
     }
     response = await async_client.post("/register/", json=user_data)
+    assert response.status_code == 201
+
+    response = await async_client.post("/register/", json=user_data)
     assert response.status_code == 422
+
     response_data = await response.json()
     assert any("Email already exists" in detail.get("msg", "") for detail in response_data.get("detail", []))
     # assert "Email already exists" in response.json().get("detail", "")
 
-    delete_response = await async_client.delete(f"/users/{verified_user.id}")
-    assert delete_response.status_code == 204
-    
 @pytest.mark.asyncio
 async def test_create_user_invalid_email(async_client):
     user_data = {
