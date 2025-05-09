@@ -76,6 +76,9 @@ async def test_create_user_duplicate_email(async_client, verified_user):
     assert any("Email already exists" in detail.get("msg", "") for detail in response_data.get("detail", []))
     # assert "Email already exists" in response.json().get("detail", "")
 
+    delete_response = await async_client.delete(f"/users/{verified_user.id}")
+    assert delete_response.status_code == 204
+    
 @pytest.mark.asyncio
 async def test_create_user_invalid_email(async_client):
     user_data = {
