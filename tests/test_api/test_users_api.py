@@ -67,11 +67,13 @@ async def test_create_user_duplicate_email(async_client, verified_user):
     user_data = {
         "email": verified_user.email,
         "password": "AnotherPassword123!",
-        "role": UserRole.ADMIN.name
+        "role": UserRole.ADMIN.name,
+        "nickname": "TestUserNickname"
     }
     response = await async_client.post("/register/", json=user_data)
     assert response.status_code == 422
-    assert "Email already exists" in response.json().get("detail", "")
+    assert any("Email already exists" in detail.get("msg", "") for detail in response_data.get("detail", [])) # type: ignore
+    # assert "Email already exists" in response.json().get("detail", "")
 
 @pytest.mark.asyncio
 async def test_create_user_invalid_email(async_client):
