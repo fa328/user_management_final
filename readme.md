@@ -35,7 +35,9 @@ Issue 5 : https://github.com/fa328/user_management_final/issues/5
 ## Features 
 User Profile Management
 
-Define the function called send_professional_upgrade_email, which sends an email notification to a user when their account has been upgraded to a professional status by admins. 
+Define the function called send_professional_upgrade_email, which sends an email notification to a user when their account has been upgraded to a professional status by admins.
+
+https://github.com/fa328/user_management_final/tree/feature
 
 ## Reflection Document
 
